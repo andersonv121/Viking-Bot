@@ -1,0 +1,147 @@
+token: ""
+url: "https://lichess.org/"
+
+engine:
+  dir: "."
+  name: "MyEngine"
+  protocol: "homemade"
+  debug: false
+  working_dir: ""
+  ponder: true
+
+  polyglot:
+    enabled: false
+    book:
+      standard:
+        - engines/book1.bin
+        - engines/book2.bin
+    min_weight: 1
+    selection: "weighted_random"
+    max_depth: 20
+    normalization: "none"
+
+  draw_or_resign:
+    resign_enabled: false
+    resign_score: -1000
+    resign_for_egtb_minus_two: true
+    resign_moves: 3
+    offer_draw_enabled: true
+    offer_draw_score: 0
+    offer_draw_for_egtb_zero: true
+    offer_draw_moves: 10
+    offer_draw_pieces: 10
+
+  online_moves:
+    max_out_of_book_moves: 10
+    max_retries: 2
+    chessdb_book:
+      enabled: false
+      min_time: 20
+      max_time: 10800
+      move_quality: "good"
+      min_depth: 20
+    lichess_cloud_analysis:
+      enabled: false
+      min_time: 20
+      max_time: 10800
+      move_quality: "best"
+      max_score_difference: 50
+      min_depth: 20
+      min_knodes: 0
+    lichess_opening_explorer:
+      enabled: false
+      min_time: 20
+      max_time: 10800
+      source: "masters"
+      player_name: ""
+      sort: "winrate"
+      min_games: 10
+    online_egtb:
+      enabled: false
+      min_time: 20
+      max_time: 10800
+      max_pieces: 7
+      source: "lichess"
+      move_quality: "best"
+
+  lichess_bot_tbs:
+    syzygy:
+      enabled: false
+      paths:
+        - "engines/syzygy"
+      max_pieces: 7
+      move_quality: "best"
+    gaviota:
+      enabled: false
+      paths:
+        - "engines/gaviota"
+      max_pieces: 5
+      min_dtm_to_consider_as_wdl_1: 120
+      move_quality: "best"
+
+  silence_stderr: false
+
+abort_time: 30
+fake_think_time: false
+rate_limiting_delay: 1000
+move_overhead: 2000
+max_takebacks_accepted: 0
+quit_after_all_games_finish: false
+
+correspondence:
+  move_time: 60
+  checkin_period: 300
+  disconnect_time: 150
+  ponder: false
+
+challenge:
+  concurrency: 1
+  sort_by: "best"
+  preference: "none"
+  accept_bot: true
+  only_bot: false
+  max_increment: 20
+  min_increment: 0
+  max_base: 5000
+  min_base: 0
+  min_days: 1
+  variants:
+    - standard
+    - fromPosition
+  time_controls:
+    - bullet
+    - blitz
+    - rapid
+    - classical
+  modes:
+    - casual
+    - rated
+  bullet_requires_increment: false
+  max_simultaneous_games_per_user: 5
+
+greeting:
+  hello: "Hi! I'm {me}. Good luck! Type !help for a list of commands I can respond to."
+  goodbye: "Good game!"
+  hello_spectators: "Hi! I'm {me}. Type !help for a list of commands I can respond to."
+  goodbye_spectators: "Thanks for watching!"
+
+matchmaking:
+  allow_matchmaking: false         # Set it to 'true' to challenge other bots.
+  allow_during_games: false        # Set it to 'true' to create challenges during long games.
+  challenge_variant: "random"      # If set to 'random', the bot will choose one variant from the variants enabled in 'challenge.variants'.
+  challenge_timeout: 3           # Create a challenge after being idle for 'challenge_timeout' minutes. The minimum is 1 minute.
+  challenge_initial_time:          # Initial time in seconds of the challenge (to be chosen at random).
+ #   - 60
+    - 300
+  challenge_increment:             # Increment in seconds of the challenge (to be chosen at random).
+    - 3
+#  challenge_days:                 # Days for correspondence challenge (to be chosen at random).
+#    - 1
+#    - 2
+# opponent_min_rating: 600         # Opponents rating should be above this value (600 is the minimum rating in lichess).
+# opponent_max_rating: 4000        # Opponents rating should be below this value (4000 is the maximum rating in lichess).
+#  opponent_rating_difference: 300  # The maximum difference in rating between the bot's rating and opponent's rating.
+  rating_preference: "none"        # One of "none", "high", "low".
+  challenge_mode: "casual"         # Set it to the mode in which challenges are sent. Possible options are 'casual', 'rated' and 'random'.
+  challenge_filter: none           # If a bot declines a challenge, do not issue a similar challenge to that bot. Possible options are 'none', 'coarse', and 'fine'.
+  include_challenge_block_list: false
